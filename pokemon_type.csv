@@ -53,8 +53,7 @@ Water,Dragon,0.5
 Water,Dark,1
 Water,Steel,1
 Water,Fairy,1
-Electric
-Electric,Fairy,1,Normal,1
+Electric,Normal,1
 Electric,Fire,1
 Electric,Water,2
 Electric,Electric,0.5
@@ -71,6 +70,7 @@ Electric,Ghost,1
 Electric,Dragon,0.5
 Electric,Dark,1
 Electric,Steel,1
+Electric,Fairy,1,
 Grass,Normal,1
 Grass,Fire,0.5
 Grass,Water,2
