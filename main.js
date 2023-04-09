@@ -64,12 +64,13 @@ d3.select("#region").on("change", (event, d)=>{
 
     type(poke_global_data,first_poke[0].type);//Call function that count type and call piechart
     poke_type_tab();
+    legendary_plot(poke_global_data,region);
 })()
 });
 
 
 
-    legendary_plot(poke_global_data,region);
+    
 
 
 function type(poke_global_data,data_pokemon){
