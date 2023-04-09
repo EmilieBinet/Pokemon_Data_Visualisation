@@ -1,7 +1,7 @@
 //Sources:
 //Images sources : https://www.kaggle.com/datasets/kvpratama/pokemon-images-dataset?select=pokemon
 
-let poke_image_src = "./pokemon";
+let poke_image_src = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon/";
 let poke_global_data = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_global.csv";
 let poke_type_WS = "https://raw.githubusercontent.com/zonination/pokemon-chart/master/chart.csv";
 
@@ -29,11 +29,11 @@ d3.select("#region").on("change", (event, d)=>{
             return nb_poke;
         }
     })
-    //let nb_poke = forEachRegion(poke_global_data,region,selectedOption);
+
     //let starter_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
 
     let first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
-    //let second_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
+    let second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
 
 
     let frst_name = await d3.csv(poke_global_data,function(d){
@@ -43,11 +43,23 @@ d3.select("#region").on("change", (event, d)=>{
             return d.name;
         }
     })
-    console.log(frst_name.toString());
+    let second_name = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == first_ID){
+            console.log(d.name);
+            console.log(first_ID);
+            return d.name;
+        }
+    })
 
-    d3.select("body").selectAll(".first_capture")
+    d3.select("body").selectAll("#first_img")
     .append("img")
-    .attr("src",poke_image_src + frst_name + ".png");
+    .attr("src",poke_image_src + first_ID + ".png")
+    .text(frst_name);
+
+    d3.select("body").selectAll("#second_img")
+    .append("img")
+    .attr("src",poke_image_src + second_ID + ".png")
+    .text(second_name);
     
     
     //console.log(d.name[second_pokemon]);
