@@ -1,32 +1,68 @@
 //Sources:
 //Images sources : https://www.kaggle.com/datasets/kvpratama/pokemon-images-dataset?select=pokemon
 
-let poke_image_src = "./pokemon/pokemon";
+let poke_image_src = "./pokemon";
 let poke_global_data = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_global.csv";
 let poke_type_WS = "https://raw.githubusercontent.com/zonination/pokemon-chart/master/chart.csv";
 
 let region = ["Kanto","Johto","Hoenn","Sinnoh","Unova","Kalos","Alola"]
-let selectedOption = region_selection();
-console.log(selectedOption);
 
-d3.select("body").select("#intro")
+d3.select("#region").on("change", (event, d)=>{
+    (async ()=>{
+    let selectedOption = d3.select("#region").property("value");
+
+
+    d3.select("body").select("#intro")
     .data(selectedOption)
     .html("You'll begin your journey in "+ selectedOption)
     .style("left", (event.x)/2 + "px")
-    .style("top", (event.y)/2 + "px")
+    .style("top", (event.y)/2 + "px");
+
+    let nb_poke=[0,0];
+
+    await d3.csv(poke_global_data,function(d){
+        if(region[d.generation-1] == selectedOption){
+            if(nb_poke[0] == 0){
+                nb_poke[0] = d.pokedex_number;
+            }
+            nb_poke[1] = d.pokedex_number;
+            return nb_poke;
+        }
+    })
+    //let nb_poke = forEachRegion(poke_global_data,region,selectedOption);
+    //let starter_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
+
+    let first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+    //let second_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
 
 
-/*let nb_poke_region = forEachRegion(poke_global_data);
+    let frst_name = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == first_ID){
+            console.log(d.name);
+            console.log(first_ID);
+            return d.name;
+        }
+    })
+    console.log(frst_name.toString());
 
-let starter_pokemon = Math.floor(Math.random() * nb_poke_region )+ nb_poke_region[region];
-let first_pokemon = Math.floor(Math.random() * nb_poke_region);
-let second_pokemon = Math.floor(Math.random() * 803);
-let legendary_pokemon = Math.floor(Math.random() * 803);
+    d3.select("body").selectAll(".first_capture")
+    .append("img")
+    .attr("src",poke_image_src + frst_name + ".png");
+    
+    
+    //console.log(d.name[second_pokemon]);
+    //let legendary_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
 
-*/
-legendary_plot(poke_global_data,region);
-type(poke_global_data);//Call function that count type and call piechart
-poke_type_tab();
+    legendary_plot(poke_global_data,region);
+    type(poke_global_data);//Call function that count type and call piechart
+    poke_type_tab();
+})()
+});
+
+
+
+
+
 
 function type(poke_global_data){
     //FIlter the 

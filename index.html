@@ -31,6 +31,7 @@
         <div class="story" id="introduction">
             <!--Region selection-->
             <select id="region">
+                <option value="Choose"></option>
                 <option value="Kanto">Kanto</option>
                 <option value="Johto">Johto</option>
                 <option value="Hoenn">Hoenn</option>
@@ -53,8 +54,10 @@
                     <span class="close">&times;</span>
                     <h3 class="poketeam"></h3>
                 </div>
+            </div>
             <div class="modal-body">
                 <div id="all_team"></div>
+            </div>
         </div>
 
         <div class="story" id="starter">
@@ -69,9 +72,10 @@
         <div class="story" id="beginning">
             <text class="explainations" id="intro"></text>
             <br>
-            <div class="1st_capture">
+            <div class="first_capture">
                 <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
+                <div id="first_img" class="image"></div>
                 <button id="capture">Capture it !</button>
                 <br>
                 <text>You did it!</text>
