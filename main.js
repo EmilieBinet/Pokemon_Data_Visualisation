@@ -36,47 +36,43 @@ d3.select("#region").on("change", (event, d)=>{
     let second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
 
 
-    let frst_name = await d3.csv(poke_global_data,function(d){
+    let first_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == first_ID){
-            console.log(d.name);
-            console.log(first_ID);
-            return d.name;
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
         }
     })
-    let second_name = await d3.csv(poke_global_data,function(d){
-        if(d.pokedex_number == first_ID){
-            console.log(d.name);
-            console.log(first_ID);
-            return d.name;
+    let second_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == second_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
         }
     })
 
     d3.select("body").selectAll("#first_img")
     .append("img")
-    .attr("src",poke_image_src + first_ID + ".png")
-    .text(frst_name);
+    .attr("src",poke_image_src + first_poke[0].nb + ".png")
+    .text(first_poke[0].name);
 
     d3.select("body").selectAll("#second_img")
     .append("img")
-    .attr("src",poke_image_src + second_ID + ".png")
-    .text(second_name);
+    .attr("src",poke_image_src + second_poke[0].nb + ".png")
+    .text(second_poke[0].name);
     
     
     //console.log(d.name[second_pokemon]);
     //let legendary_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
 
-    legendary_plot(poke_global_data,region);
-    type(poke_global_data);//Call function that count type and call piechart
+
+    type(poke_global_data,first_poke[0].type);//Call function that count type and call piechart
     poke_type_tab();
 })()
 });
 
 
 
+    legendary_plot(poke_global_data,region);
 
 
-
-function type(poke_global_data){
+function type(poke_global_data,data_pokemon){
     //FIlter the 
     (async ()=>{
     let type_data = {"grass": 0,"poison":0,"bug":0,"electric":0,"ground":0,"ice":0,"fire":0,"water":0,"normal":0,"flying":0,"ghost": 0,"psychic":0,"dark":0,"fighting":0,"fairy":0,"dragon":0,"rock":0,"steel":0};
@@ -88,7 +84,7 @@ function type(poke_global_data){
             }}
         return type_data;    
         })
-        poke_type(type_data);//Call pie chart
+        poke_type(type_data,data_pokemon);//Call pie chart
     })();
 }
 

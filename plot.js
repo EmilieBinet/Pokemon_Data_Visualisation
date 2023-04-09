@@ -1,4 +1,4 @@
-function poke_type(type_data){
+function poke_type(type_data,data_pokemon){
     // set the dimensions and margins of the graph
     const width = 450,
     height = 450,
@@ -44,6 +44,10 @@ function poke_type(type_data){
     d3.select(this)
     .style("stroke", "black")
     .style("opacity", 1)
+    .filter(d=>data_pokemon.includes(d.data[0]))
+    .style("stroke","#ff0000")
+    .style("stroke-width",10)
+    .style("opacity",1)
     }
     const mousemove = function(event,d) {
     tooltip
@@ -57,8 +61,13 @@ function poke_type(type_data){
     d3.select(this)
     .style("stroke", "none")
     .style("opacity", 0.8)
+    .filter(d=>data_pokemon.includes(d.data[0]))
+    .style("stroke","#ff0000")
+    .style("stroke-width",5)
+    .style("opacity",1)
     }
 
+  
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     svg
     .selectAll('whatever')
@@ -68,11 +77,15 @@ function poke_type(type_data){
     .innerRadius(0)
     .outerRadius(radius)
     )
-    .attr('fill', function(d){ return(color(d.data[0])) })
-    .style("opacity", 0.7)
     .on("mouseover", mouseover)
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
+    .attr('fill', function(d){ return(color(d.data[0])) })
+    .style("opacity", 0.7)
+    .filter(d=>data_pokemon.includes(d.data[0]))
+    .attr("stroke","#ff0000")
+    .style("stroke-width",5)
+    .style("opacity",1)
 }
 
 function poke_type_tab(){
