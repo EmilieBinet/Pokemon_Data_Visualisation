@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="utf-8">
+        <!--Header-->
+        <title>Pokemon Trainer Journey</title>
+
+        <!--Sources-->
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+       
+        <!--<script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>-->
+
+        
+        <!--Style & functions-->
+        <link href="index.css" rel="stylesheet" type="text/css">
+        <script src="plot.js" defer></script>
+        <script src="region.js" defer></script>
+        <script src="modal.js" defer></script>
+        <script src="main.js" defer></script>
+        
+    </head>
+
+    <body>
+        <div id="head">
+            <h1 id="website_title">A Pokemon Trainer Vizualisation Journey</h1>
+            <button id="reset">Reset</button>
+        </div>
+
+
+        <div class="story" id="introduction">
+            <!--Region selection-->
+            <select id="region">
+                <option value="Kanto">Kanto</option>
+                <option value="Johto">Johto</option>
+                <option value="Hoenn">Hoenn</option>
+                <option value="Sinnoh">Sinnoh</option>
+                <option value="Unova">Unova</option>
+                <option value="Kalos">Kalos</option>
+                <option value="Alola">Alola</option>
+                <option value="Galar">Galar</option>
+            </select>
+            <br>
+            <text class="explainations" id="intro"></text>
+            <br>
+        </div>
+
+        <img src="pokeball.png" width=100 height=100 id="pokeball_btn"/>
+        
+        <div id="team" class = "modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h3 class="poketeam"></h3>
+                </div>
+            <div class="modal-body">
+                <div id="all_team"></div>
+        </div>
+
+        <div class="story" id="starter">
+            <text class="explainations" id="intro"></text>
+            <br>
+            <h2 id="starter_selection">Choose your starter</h2>
+            <br>
+            <div class="option" id="starter_option"><!--Put images of the three starter of this region--></div>
+            <br>
+        </div>
+
+        <div class="story" id="beginning">
+            <text class="explainations" id="intro"></text>
+            <br>
+            <div class="1st_capture">
+                <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
+                <!--Showing images of a random pokemon from this region except evolution and legendary-->
+                <button id="capture">Capture it !</button>
+                <br>
+                <text>You did it!</text>
+                <br>
+                <text> Did you know that : </text>
+                <div id="poke_type" class="graph"></div>
+                <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
+                    Pie chart about pokemon ype proportion
+                -->
+            </div>
+            <br>
+            <text class="explainations" id="intro"></text>
+            <br>
+            <div class="2nd_capture">
+                <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
+                <!--Showing images of a random pokemon from this region except evolution and legendary-->
+                <button id="capture">Capture it !</button>
+                <br>
+                <text>You did it!</text>
+                <br>
+                <text> Did you know that : </text>
+                <div id="poke_WS_tab" class="graph"></div>
+                <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
+                    Pie chart about pokemon ype proportion
+                -->
+            </div>
+
+            <br>
+            <text class="explainations" id="intro"></text>
+            <br>
+            <div class="legendary_capture">
+                <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
+                <!--Showing images of a random pokemon from this region except evolution and legendary-->
+                <button id="capture">Capture it !</button>
+                <br>
+                <text>You did it!</text>
+                <br>
+                <text> Did you know that : </text>
+                <div id="legendary_region" class="graph"></div>
+                <div id="legendary_prop" class="graph"></div>
+                <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
+                    Pie chart about pokemon ype proportion
+                -->
+            </div>
+        </div>
+
+            <!--Doing it 3 more time (or an egg)-->
+            <!--Fight a enemy team of the region-->
+            <!--Doing it for a legendary + bar plot about number of legendary per region-->
+        
+        <div class="story" id="end">
+            <text>You're now ready to fight the Champion's Ligue of ...</text>
+            <br>
+            <text>If you're not sure about your team potential. Here's the journey statistics. Feel free to check you pokemon stats!</text>
+            <br>
+            <button id="team_stat">Team Stats</button>
+            <!--Team popup disapeared and appeared in line in new Popup with all the graph that we show progressivly in the journey (or a part of it)
+            By clicking on each pokemon highligh the pokemon link in each stats (type, all statscluster, legendaryornot,...) -->
+            <br>
+            <text>Hope to see you again for a new journey!</text>
+            <!--Arrow to go back at the beginning-->
+        
+        </div>
+    </body>
+</html>

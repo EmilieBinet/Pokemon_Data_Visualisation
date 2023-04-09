@@ -1,0 +1,99 @@
+//Sources:
+//Images sources : https://www.kaggle.com/datasets/kvpratama/pokemon-images-dataset?select=pokemon
+
+let poke_image_src = "./pokemon/pokemon";
+let poke_global_data = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_global.csv";
+let poke_type_WS = "https://raw.githubusercontent.com/zonination/pokemon-chart/master/chart.csv";
+
+let region = ["Kanto","Johto","Hoenn","Sinnoh","Unova","Kalos","Alola"]
+let selectedOption = region_selection();
+console.log(selectedOption);
+
+d3.select("body").select("#intro")
+    .data(selectedOption)
+    .html("You'll begin your journey in "+ selectedOption)
+    .style("left", (event.x)/2 + "px")
+    .style("top", (event.y)/2 + "px")
+
+
+/*let nb_poke_region = forEachRegion(poke_global_data);
+
+let starter_pokemon = Math.floor(Math.random() * nb_poke_region )+ nb_poke_region[region];
+let first_pokemon = Math.floor(Math.random() * nb_poke_region);
+let second_pokemon = Math.floor(Math.random() * 803);
+let legendary_pokemon = Math.floor(Math.random() * 803);
+
+*/
+legendary_plot(poke_global_data,region);
+type(poke_global_data);//Call function that count type and call piechart
+poke_type_tab();
+
+function type(poke_global_data){
+    //FIlter the 
+    (async ()=>{
+    let type_data = {"grass": 0,"poison":0,"bug":0,"electric":0,"ground":0,"ice":0,"fire":0,"water":0,"normal":0,"flying":0,"ghost": 0,"psychic":0,"dark":0,"fighting":0,"fairy":0,"dragon":0,"rock":0,"steel":0};
+
+    await d3.csv(poke_global_data,function(d){
+        for (type in type_data){
+            if(type == d.type1||type == d.type2){
+                type_data[type] = type_data[type] + 1;
+            }}
+        return type_data;    
+        })
+        poke_type(type_data);//Call pie chart
+    })();
+}
+
+
+function legendary_plot(poke_global_data,region){
+    (async ()=>{
+        let data_leg_region ={"Kanto":0,"Johto":0,"Hoenn":0,"Sinnoh":0,"Unova":0,"Kalos":0,"Alola":0};
+        let data_leg={"Legendary":0,"Non-Legendary":0};
+
+        await d3.csv(poke_global_data,function(d){
+            if(d.is_legendary == 1){
+                var reg = region[d.generation-1];
+                return ((data_leg_region[reg] = data_leg_region[reg] + 1),(data_leg[0]=data_leg[0]+1));
+                } 
+            else{
+                return data_leg[1]=data_leg[1]+1;
+            }
+            })
+            leg_per_region(data_leg_region);
+            //legendary_piechart(data_leg);
+        })();
+}
+d3.select("body")
+    .select("#pokeball_btn")
+    .on("click",function(d){
+        popup_appear();});
+
+function show_image(src, width, height, alt) {
+        var img = document.createElement("img");
+        img.src = src;
+        img.width = width;
+        img.height = height;
+        img.alt = alt;
+    
+        // This next line will just add it to the <body> tag
+        document.body.appendChild(img);
+    }
+
+function typeWriter(){
+    //Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_typewriter
+    var i = 0;
+    var txt = 'Lorem ipsum dummy text blabla.';
+    var speed = 50;
+
+    if (i < txt.length) {
+        document.getElementById("text").innerHTML += txt.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+    }
+}
+
+
+
+
+
+
