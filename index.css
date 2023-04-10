@@ -5,9 +5,17 @@ body{
 
 #pokeball{
     position: fixed;
-    text-align:right;
+    padding:right;
     top:100px;
 }
+.dot {
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    opacity:0.5;
+  }
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -16,8 +24,8 @@ body{
     transition-duration: 1s;
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
-    width: 100px; /* Full width */
-    height: 100px; /* Full height */
+    width: 200px; /* Full width */
+    height: 300px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
 }
 /* Modal Content */
@@ -28,7 +36,8 @@ body{
     margin: 0px;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 70%;
+    height:80%;
 }
 .close {
     color: #aaaaaa;
@@ -44,3 +53,7 @@ body{
     cursor: pointer;
     }
 /*FAIRE Modal TEAM use https://www.w3schools.com/Css/css_positioning.asp */
+
+h3{
+    display:none;
+}

@@ -30,7 +30,27 @@ d3.select("#region").on("change", (event, d)=>{
         }
     })
 
-    //let starter_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
+    d3.select("body").select("#starter_intro")
+    .data(selectedOption)
+    .html("It's time fo you to choose your first pokemon also called you : STARTER")
+    .style("left", (event.x)/2 + "px")
+    .style("top", (event.y)/2 + "px");
+    
+    
+    let starter_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
+    let sarter_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == first_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })
+    while(starter_poke[0].legend != 0){
+        starter_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+        starter_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == second_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })}
+    
 
     let first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
     let second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
@@ -41,11 +61,25 @@ d3.select("#region").on("change", (event, d)=>{
             return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
         }
     })
+    while(first_poke[0].legend != 0){
+        first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+        first_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == second_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })}
     let second_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == second_ID){
             return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
         }
     })
+    while(second_poke[0].legend != 0){
+        second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+        second_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == second_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })}
 
     d3.select("body").selectAll("#first_img")
     .append("img")
@@ -59,7 +93,26 @@ d3.select("#region").on("change", (event, d)=>{
     
     
     //console.log(d.name[second_pokemon]);
-    //let legendary_pokemon = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + nb_poke[0];
+
+    let legend_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+    let legend_poke = await d3.csv(poke_global_data,function(d){
+
+        if(d.pokedex_number == legend_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })
+    while(legend_poke[0].legend != 1){
+        legend_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
+        legend_poke = await d3.csv(poke_global_data,function(d){
+        if(d.pokedex_number == legend_ID){
+            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        }
+    })}
+    d3.select("body").selectAll("#legendary_img")
+    .append("img")
+    .attr("src",poke_image_src + legend_poke[0].nb + ".png")
+    .text(legend_poke[0].name);
+    
 
 
     type(poke_global_data,first_poke[0].type);//Call function that count type and call piechart
@@ -108,21 +161,20 @@ function legendary_plot(poke_global_data,region){
             //legendary_piechart(data_leg);
         })();
 }
+
 d3.select("body")
     .select("#pokeball_btn")
     .on("click",function(d){
         popup_appear();});
 
-function show_image(src, width, height, alt) {
-        var img = document.createElement("img");
-        img.src = src;
-        img.width = width;
-        img.height = height;
-        img.alt = alt;
-    
-        // This next line will just add it to the <body> tag
-        document.body.appendChild(img);
-    }
+d3.select("body")
+    .select("#capture_first")
+    .on("click",function(d){
+        d3.select(this)
+        .transition().duration(100).remove()
+        d3.select("#second_teammate")
+        .append();
+    })
 
 function typeWriter(){
     //Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_typewriter

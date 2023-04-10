@@ -245,7 +245,7 @@ svg.append("text")
 
 
 function leg_per_region(data_leg_region){
-
+  console.log(data_leg_region)
     // set the dimensions and margins of the graph
     const margin = {top: 10, right: 30, bottom: 90, left: 40},
     width = 460 - margin.left - margin.right,
@@ -300,11 +300,11 @@ function leg_per_region(data_leg_region){
     }
 
     const mouseclick = function(d) {
-
       d3.select(this)
         .style("stroke", "black")
         .style("opacity", 1);
-      legendary_piechart(d);
+      legendary_piechart(d3.select(this).datum().value);
+      console.log(d3.select(this).datum().value);
     }
     // Bars
     svg.selectAll("mybar")
@@ -326,12 +326,12 @@ function leg_per_region(data_leg_region){
     .duration(800)
     .attr("y", d => y(d.value))
     .attr("height", d => height - y(d.value))
-    .delay((d,i) => { return i*100})
-
-    
+    .delay((d,i) => { return i*100})  
 }
 
-function legendary_piechart(){
+function legendary_piechart(data_leg){
+    d3.select("#piechart_leg").remove();
+
     // set the dimensions and margins of the graph
     const width = 450,
     height = 450,
@@ -343,13 +343,14 @@ function legendary_piechart(){
     // append the svg object to the div called 'my_dataviz'
     const svg = d3.select("#legendary_prop")
     .append("svg")
+    .attr("id", "piechart_leg")
     .attr("width", width)
     .attr("height", height)
     .append("g")
     .attr("transform", `translate(${width/2}, ${height/2})`);
 
     // Create dummy data
-    const data = {a: 9, b: 20}
+    const data = {a: data_leg, b: 20}
 
     // set the color scale
     const color = d3.scaleOrdinal()

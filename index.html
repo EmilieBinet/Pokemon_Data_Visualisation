@@ -27,9 +27,9 @@
             <button id="reset">Reset</button>
         </div>
 
-
         <div class="story" id="introduction">
             <!--Region selection-->
+            <br>
             <select id="region">
                 <option value="Choose"></option>
                 <option value="Kanto">Kanto</option>
@@ -52,16 +52,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>
-                    <h3 class="poketeam"></h3>
+                    <h2 class="poketeam">POKEMON TEAM</h2>
                 </div>
-            </div>
-            <div class="modal-body">
-                <div id="all_team"></div>
+                <div class="modal-body">
+                    <div id="all_team">
+                        <div id="first_line">
+                            <span class="dot" id="first_teammate"></span>
+                            <span class="dot" id="second_teammate"></span>
+                        </div>
+                        <div id="second_line">
+                            <span class="dot" id="third_teammate"></span>
+                            <span class="dot" id="fourth_teammate"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="story" id="starter">
-            <text class="explainations" id="intro"></text>
+            <text class="explainations" id="starter_intro"></text>
             <br>
             <h2 id="starter_selection">Choose your starter</h2>
             <br>
@@ -77,10 +86,10 @@
             <text class="explainations" id="intro"></text>
             <br>
             <div class="first_capture">
-                <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
+                <h3 class="new_pokemon" >New Pokemon Appeared!!</h3>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
                 <div id="first_img" class="image"></div>
-                <button id="capture">Capture it !</button>
+                <button id="capture_first">Capture it !</button>
                 <br>
                 <text>You did it!</text>
                 <br>
@@ -114,6 +123,7 @@
             <div class="legendary_capture">
                 <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
+                <div id="legendary_img" class="image"></div>
                 <button id="capture">Capture it !</button>
                 <br>
                 <text>You did it!</text>
@@ -136,7 +146,8 @@
             <br>
             <text>If you're not sure about your team potential. Here's the journey statistics. Feel free to check you pokemon stats!</text>
             <br>
-            <button id="team_stat">Team Stats</button>
+            <button id="team_stat_btn">Team Stats</button>
+            <div id="team_stat"></div>
             <!--Team popup disapeared and appeared in line in new Popup with all the graph that we show progressivly in the journey (or a part of it)
             By clicking on each pokemon highligh the pokemon link in each stats (type, all statscluster, legendaryornot,...) -->
             <br>
