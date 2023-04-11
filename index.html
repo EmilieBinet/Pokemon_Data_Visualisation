@@ -25,12 +25,14 @@
     <body>
         <div id="head">
             <h1 id="website_title">A Pokemon Trainer Vizualisation Journey</h1>
-            <button id="reset">Reset</button>
         </div>
 
         <div class="story" id="introduction">
             <!--Region selection-->
-            <br>
+            <text>Hello! On this website you will be able to try a quick Pokemon Trainer Journey and you will get some useful and interesting information!</text>
+            <br><br>
+            <text>First choose where you will go on a adventure!</text>
+            <br><br>
             <select id="region">
                 <option value="Choose"></option>
                 <option value="Kanto">Kanto</option>
@@ -39,8 +41,6 @@
                 <option value="Sinnoh">Sinnoh</option>
                 <option value="Unova">Unova</option>
                 <option value="Kalos">Kalos</option>
-                <option value="Alola">Alola</option>
-                <option value="Galar">Galar</option>
             </select>
             <br>
             <text class="explainations" id="intro"></text>
@@ -78,8 +78,11 @@
             <div class="option" id="starter_option">
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
-                <img src="pokeball_starter.png" width=100 height=100 class="stater_btn"/>
-                <div class="info_pokemon" id="starter_info"></div>
+                <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
+                <div id="img_starter"></div>
+                <div class="info_pokemon" id="starter_info">
+                    <div id="hp_starter" width="0"></div>
+                </div>
             </div>
             <br>
         </div>
@@ -162,7 +165,8 @@
             <br>
             <text>Hope to see you again for a new journey!</text>
             <!--Arrow to go back at the beginning-->
-        
+            <br><br><br>
+            <button id="reset">Begin a new Journey</button>
         </div>
     </body>
 </html>
