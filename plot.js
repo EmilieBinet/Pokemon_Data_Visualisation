@@ -4,12 +4,18 @@ function poke_type(type_data,data_pokemon){
     height = 450,
     margin = 40;
 
+
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
 
+    d3.select("#poke_type")
+    .text("YOU DID IT!");
+    
     // append the svg object to the div called 'my_dataviz'
     const svg = d3.select("#poke_type")
+    .text("Did you know that :")
     .append("svg")
+    .attr("id", "piechart_type")
     .attr("width", width)
     .attr("height", height)
     .append("g")
@@ -98,6 +104,7 @@ height = 700 - margin.top - margin.bottom;
 // append the svg object to the body of the page
 const svg = d3.select("#poke_WS_tab")
 .append("svg")
+.attr("id","type_tab")
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
@@ -254,6 +261,7 @@ function leg_per_region(data_leg_region){
     // append the svg object to the body of the page
     const svg = d3.select("#legendary_region")
     .append("svg")
+    .attr("id", "leg_barplot")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")

@@ -27,7 +27,7 @@
             <h1 id="website_title">A Pokemon Trainer Vizualisation Journey</h1>
         </div>
 
-        <div class="story" id="introduction">
+        <div  id="introduction">
             <!--Region selection-->
             <text>Hello! On this website you will be able to try a quick Pokemon Trainer Journey and you will get some useful and interesting information!</text>
             <br><br>
@@ -64,11 +64,7 @@
                         <div id="second_line">
                             <span class="dot" id="third_teammate"></span>
                             <span class="dot" id="fourth_teammate"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div></div></div></div></div>
 
         <div class="story" id="starter">
             <text class="explainations" id="starter_intro"></text>
@@ -82,58 +78,61 @@
                 <div id="img_starter"></div>
                 <div class="info_pokemon" id="starter_info">
                     <div id="hp_starter" width="0"></div>
-                </div>
-            </div>
-            <br>
-        </div>
+                    <br>
+            </div></div></div>
 
         <div class="story" id="beginning">
-            <text class="explainations" id="intro"></text>
-            <br>
-            <div class="first_capture">
+                <text class="explainations" id="intro"></text>
+                <br>
                 <h3 class="new_pokemon" >New Pokemon Appeared!!</h3>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
                 <div id="first_img" class="image"></div>
                 <div class="info_pokemon" id="starter_info"></div>
                 <button class="capture_btn" id="capture_first">Capture it !</button>
                 <br>
-                <text>You did it!</text>
-                <br>
-                <text> Did you know that : </text>
-                <div id="poke_type" class="graph"></div>
+                <div id="poke_type"></div>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
                 -->
-            </div>
+        </div>
+
+        
+
+        <div class="story" id="second_capture">  
             <br>
             <text class="explainations" id="intro"></text>
             <br>
-            <div class="2nd_capture">
-                <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
-                <!--Showing images of a random pokemon from this region except evolution and legendary-->
-                <div id="second_img" class="image"></div>
-                <div class="info_pokemon" id="starter_info"></div>
-                <button class="capture_btn" id="second_capture">Capture it !</button>
-                <br>
+                
+            <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
+            <!--Showing images of a random pokemon from this region except evolution and legendary-->
+            <div id="second_img" class="image"></div>
+            <div class="info_pokemon" id="starter_info"></div>
+            <button class="capture_btn" id="second_capture">Capture it !</button>
+            <br>
+        </div>
+
+        <div class="story" id="after_second_capture">
                 <text>You did it!</text>
                 <br>
                 <text> Did you know that : </text>
                 <div id="poke_WS_tab" class="graph"></div>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
-                -->
-            </div>
+                --> 
+                <br>
+        </div>
 
-            <br>
+        <div class="story" id="legend_capture">
             <text class="explainations" id="intro"></text>
             <br>
-            <div class="legendary_capture">
                 <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
                 <div id="legendary_img" class="image"></div>
                 <div class="info_pokemon" id="starter_info"></div>
                 <button class="capture_btn" id="legend_capture">Capture it !</button>
                 <br>
+        </div>
+        <div class="story" id="after_legend_capture">
                 <text>You did it!</text>
                 <br>
                 <text> Did you know that : </text>
@@ -146,7 +145,7 @@
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
                 -->
-            </div>
+        </div>
         </div>
 
             <!--Doing it 3 more time (or an egg)-->
@@ -166,7 +165,7 @@
             <text>Hope to see you again for a new journey!</text>
             <!--Arrow to go back at the beginning-->
             <br><br><br>
-            <button id="reset">Begin a new Journey</button>
+            <button id="reset_btn">Begin a new Journey</button>
         </div>
     </body>
 </html>

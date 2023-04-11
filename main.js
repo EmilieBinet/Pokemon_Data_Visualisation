@@ -10,16 +10,23 @@ let region = ["Kanto","Johto","Hoenn","Sinnoh","Unova","Kalos","Alola"]
 d3.select("#region").on("change", (event, d)=>{
     (async ()=>{
     let selectedOption = d3.select("#region").property("value");
+    reset_journey();
 
-    d3.selectAll(".starter_btn")
-        .transition().duration(100).
-        style("display","inline-block");
+   
 
     d3.select("body").select("#intro")
     .data(selectedOption)
     .html("You'll begin your journey in "+ selectedOption)
     .style("left", (event.x)/2 + "px")
-    .style("top", (event.y)/2 + "px");
+    .style("top", (event.y)/2 + "px"); 
+    
+    d3.selectAll("#starter")
+        .transition().duration(100).
+        style("display","inline-block");
+
+    d3.selectAll(".starter_btn")
+        .transition().duration(100).
+        style("display","inline-block");
 
     let nb_poke=[0,0];
 
@@ -102,39 +109,60 @@ d3.select("#region").on("change", (event, d)=>{
     
     poke_team.push(starter_poke,first_poke,second_poke,legend_poke);
 
-    console.log(poke_team)
+
     d3.select("body")
     .selectAll(".starter_btn")
     .on("click",function(d){
         d3.selectAll(".starter_btn")
-        .transition().duration(100).
+        .transition().duration(10000).
         style("display","none");
+
         d3.select("body").selectAll("#starter_option")
         .append("img")
+        .attr("id","starter_appear")
         .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png");
-        capture_action(poke_team);
+        capture_action(poke_team,0,"starter_info");
+        console.log("hello")
+
+        d3.select("body").selectAll("#beginning")
+        .transition().duration(10000).style("display","block");
+
+       d3.select("#capture_first")
+       .on("click",d=>{
+        d3.select("#capture_first").style("display","none");
+        d3.select("body").selectAll("#first_img")
+            .append("img")
+            .attr("id","first_appear")
+            .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png")
+            .html(first_poke[0].all_info.name);})
+
+        plot_type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
+        
+
+
     });
-
-    d3.select("body").selectAll("#first_img")
-    .append("img")
-    .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png")
-    .html(first_poke[0].all_info.name);
-
+/*
     d3.select("body").selectAll("#second_img")
     .append("img")
+    .attr("id","second_appear")
     .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
     .html(second_poke[0].all_info.name);
+
     d3.select("body").selectAll("#legendary_img")
     .append("img")
+    .attr("id","legend_appear")
     .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
     .html(legend_poke[0].all_info.name);
    
     console.log(poke_team[1][0].type);
-    type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
+    plot_type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
     poke_type_tab();
     legendary_plot(poke_global_data,region);
 
     teamstat_appear()
+    */
+
+    
 })()
 });
 
@@ -144,25 +172,23 @@ d3.select("body")
     .on("click",function(d){
         popup_appear();});
 
+d3.select("body")
+.select("#reset_btn")
+.on("click",function(d){
+    reset_journey();});
 
-
-function capture_action(poke_team){
-    d3.select("body")
-    .selectAll(".capture_btn")
-    .on("click",function(d){
-        d3.select(this)
-        .transition().duration(100).remove();
-        d3.selectAll("#starter_info")
+function capture_action(poke_team,index,div_name){
+        d3.selectAll("#"+div_name)
         .style("display","inline-block")
-        .html(poke_team[0][0].all_info.name +"<br><br>"+poke_team[0][0].all_info.classfication + "<br><br>" +poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m <br><br>");
+        .html(poke_team[index][0].all_info.name +"<br><br>"+poke_team[index][0].all_info.classfication + "<br><br>" +poke_team[index][0].all_info.weight_kg+" kg " + poke_team[index][0].all_info.height_m +" m <br><br>");
         d3.selectAll("#starter_info")
-        .data(poke_team[0][0].all_info.classfication)
+        .data(poke_team[index][0].all_info.classfication)
         .join()
         .append("div")
-        .style("width", function(d) { return poke_team[0][0].all_info.hp + "px"; } )
+        .style("width", function(d) { return poke_team[index][0].all_info.hp + "px"; } )
         .style("background-color","#317b41");//afficher barre hp proportionnelle!!!
         //Afficher plot avec pourcentage male 
-    })
+    
 }
 
 
