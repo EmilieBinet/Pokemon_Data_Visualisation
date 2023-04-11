@@ -11,6 +11,9 @@ d3.select("#region").on("change", (event, d)=>{
     (async ()=>{
     let selectedOption = d3.select("#region").property("value");
 
+    d3.selectAll(".starter_btn")
+        .transition().duration(100).
+        style("display","inline-block");
 
     d3.select("body").select("#intro")
     .data(selectedOption)
@@ -40,6 +43,7 @@ d3.select("#region").on("change", (event, d)=>{
     
     let starter_rand = Math.floor(Math.random() * 2);
     let starter_ID = parseInt(nb_poke[0])+3*parseInt(starter_rand)
+
     console.log(starter_ID)
 
     let starter_poke = await d3.csv(poke_global_data,function(d){
@@ -103,11 +107,13 @@ d3.select("#region").on("change", (event, d)=>{
     .selectAll(".starter_btn")
     .on("click",function(d){
         d3.selectAll(".starter_btn")
-        .transition().duration(100).remove();
+        .transition().duration(100).
+        style("display","none");
         d3.select("body").selectAll("#starter_option")
         .append("img")
-        .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png")
-        .html(starter_poke[0].all_info.name);});
+        .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png");
+        capture_action(poke_team);
+    });
 
     d3.select("body").selectAll("#first_img")
     .append("img")
@@ -122,12 +128,12 @@ d3.select("#region").on("change", (event, d)=>{
     .append("img")
     .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
     .html(legend_poke[0].all_info.name);
-    
-    type(poke_global_data,first_poke[0].type);//Call function that count type and call piechart
+   
+    console.log(poke_team[1][0].type);
+    type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
     poke_type_tab();
     legendary_plot(poke_global_data,region);
-    capture_action(poke_team);
-    
+
     teamstat_appear()
 })()
 });
@@ -146,9 +152,11 @@ function capture_action(poke_team){
     .on("click",function(d){
         d3.select(this)
         .transition().duration(100).remove();
-        d3.selectAll(".info_pokemon")
+        d3.selectAll("#starter_info")
         .style("display","inline-block")
-        .html(poke_team[0][0].all_info.classfication + "<br>" +poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m<br>")
+        .html(poke_team[0][0].all_info.name +"<br><br>"+poke_team[0][0].all_info.classfication + "<br><br>" +poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m <br><br>");
+        d3.selectAll("#starter_info")
+        .data(poke_team[0][0].all_info.classfication)
         .join()
         .append("div")
         .style("width", function(d) { return poke_team[0][0].all_info.hp + "px"; } )
