@@ -245,7 +245,7 @@ svg.append("text")
 
 
 function leg_per_region(data_leg_region){
-  console.log(data_leg_region)
+
     // set the dimensions and margins of the graph
     const margin = {top: 10, right: 30, bottom: 90, left: 40},
     width = 460 - margin.left - margin.right,
@@ -348,6 +348,9 @@ function legendary_piechart(data_leg){
     .attr("height", height)
     .append("g")
     .attr("transform", `translate(${width/2}, ${height/2})`);
+
+    d3.selectAll("#pb_legend")
+        .style("display","inline-block");
 
     // Create dummy data
     const data = {a: data_leg, b: 20}

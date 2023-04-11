@@ -36,6 +36,7 @@ d3.select("#region").on("change", (event, d)=>{
     .style("left", (event.x)/2 + "px")
     .style("top", (event.y)/2 + "px");
     
+    let poke_team =[];
     
     let starter_rand = Math.floor(Math.random() * 2);
     let starter_ID = parseInt(nb_poke[0])+3*parseInt(starter_rand)
@@ -43,14 +44,9 @@ d3.select("#region").on("change", (event, d)=>{
 
     let starter_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == starter_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })
-    console.log(nb_poke[0]+3)
-
-    
-    console.log(starter_poke[0].name)
-    
 
     let first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
     let second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
@@ -58,66 +54,81 @@ d3.select("#region").on("change", (event, d)=>{
 
     let first_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == first_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })
-    while(first_poke[0].legend != 0){
+    while(first_poke[0].all_info.is_legendary != 0){
         first_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
         first_poke = await d3.csv(poke_global_data,function(d){
-        if(d.pokedex_number == second_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+        if(d.pokedex_number == first_ID){
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })}
+
+    console.log(first_poke)
+
     let second_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == second_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })
-    while(second_poke[0].legend != 0){
+    while(second_poke[0].all_info.is_legendary != 0){
         second_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
         second_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == second_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })}
 
-    d3.select("body").selectAll("#first_img")
-    .append("img")
-    .attr("src",poke_image_src + first_poke[0].nb + ".png")
-    .text(first_poke[0].name);
-
-    d3.select("body").selectAll("#second_img")
-    .append("img")
-    .attr("src",poke_image_src + second_poke[0].nb + ".png")
-    .text(second_poke[0].name);
-    
-    
-    //console.log(d.name[second_pokemon]);
 
     let legend_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
     let legend_poke = await d3.csv(poke_global_data,function(d){
 
         if(d.pokedex_number == legend_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })
-    while(legend_poke[0].legend != 1){
+    while(legend_poke[0].all_info.is_legendary != 1){
         legend_ID = Math.floor(Math.random() * (nb_poke[1]-nb_poke[0])) + parseInt(nb_poke[0]);
         legend_poke = await d3.csv(poke_global_data,function(d){
         if(d.pokedex_number == legend_ID){
-            return {name:d.name,legend:d.is_legendary,type:[d.type1,d.type2],nb:d.pokedex_number};
+            return {all_info : d,type:[d.type1,d.type2]};
         }
     })}
+    
+    poke_team.push(starter_poke,first_poke,second_poke,legend_poke);
+
+    console.log(poke_team)
+    d3.select("body")
+    .selectAll(".starter_btn")
+    .on("click",function(d){
+        d3.selectAll(".starter_btn")
+        .transition().duration(100).remove();
+        d3.select("body").selectAll("#starter_option")
+        .append("img")
+        .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png")
+        .html(starter_poke[0].all_info.name);});
+
+    d3.select("body").selectAll("#first_img")
+    .append("img")
+    .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png")
+    .html(first_poke[0].all_info.name);
+
+    d3.select("body").selectAll("#second_img")
+    .append("img")
+    .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
+    .html(second_poke[0].all_info.name);
     d3.select("body").selectAll("#legendary_img")
     .append("img")
-    .attr("src",poke_image_src + legend_poke[0].nb + ".png")
-    .text(legend_poke[0].name);
+    .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
+    .html(legend_poke[0].all_info.name);
     
-
-
     type(poke_global_data,first_poke[0].type);//Call function that count type and call piechart
     poke_type_tab();
     legendary_plot(poke_global_data,region);
+    capture_action(poke_team);
+    
+    teamstat_appear()
 })()
 });
 
@@ -129,14 +140,20 @@ d3.select("body")
 
 
 
-d3.select("body")
-    .select("#capture_first")
+function capture_action(poke_team){
+    d3.select("body")
+    .selectAll(".capture_btn")
     .on("click",function(d){
         d3.select(this)
-        .transition().duration(100).remove()
-        d3.select("#second_teammate")
-        .append();
+        .transition().duration(100).remove();
+        d3.selectAll(".info_pokemon")
+        .style("display","inline-block")
+        .html(poke_team[0][0].all_info.classfication + "<br>" + poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m");//afficher barre hp proportionnelle!!!
+        //Afficher plot avec pourcentage male 
     })
+}
+
+
 
 function typeWriter(){
     //Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_typewriter
@@ -150,9 +167,3 @@ function typeWriter(){
         setTimeout(typeWriter, speed);
     }
 }
-
-
-
-
-
-

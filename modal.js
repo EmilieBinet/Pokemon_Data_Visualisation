@@ -24,3 +24,19 @@ function popup_appear(){
     }}
     
 }
+
+function teamstat_appear(){
+    // Get the modal
+    d3.select("body")
+    .select("#team_stat_btn")
+    .on("click",function(d){
+        var modal = document.getElementById("team_stat");
+    d3.select("#team").select(".modal-body").select("#all_team").selectAll("svg").remove();
+
+    let team = d3.select("#team_stat")
+    .append("svg")
+    .style("padding","left")
+    
+    team.select("#all_team");})
+    
+}

@@ -1,6 +1,7 @@
 body{
     background-color: #d5d5ff;
     text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #pokeball{
@@ -54,6 +55,9 @@ body{
     }
 /*FAIRE Modal TEAM use https://www.w3schools.com/Css/css_positioning.asp */
 
-h3{
+.info_pokemon{
+    display:none;
+}
+.hidden_text{
     display:none;
 }
