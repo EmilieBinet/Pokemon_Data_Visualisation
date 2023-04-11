@@ -148,7 +148,11 @@ function capture_action(poke_team){
         .transition().duration(100).remove();
         d3.selectAll(".info_pokemon")
         .style("display","inline-block")
-        .html(poke_team[0][0].all_info.classfication + "<br>" + poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m");//afficher barre hp proportionnelle!!!
+        .html(poke_team[0][0].all_info.classfication + "<br>" +poke_team[0][0].all_info.weight_kg+" kg " + poke_team[0][0].all_info.height_m +" m<br>")
+        .join()
+        .append("div")
+        .style("width", function(d) { return poke_team[0][0].all_info.hp + "px"; } )
+        .style("background-color","#317b41");//afficher barre hp proportionnelle!!!
         //Afficher plot avec pourcentage male 
     })
 }
