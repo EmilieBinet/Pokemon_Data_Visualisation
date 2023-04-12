@@ -43,7 +43,7 @@ function poke_type(type_data,data_pokemon,div_name){
     .style("padding", "5px")
 
     // Three function that change the tooltip when user hover / move / leave a cell
-    const mouseover = function(event,d) {
+    const mouseover = function(d) {
     tooltip
     .style("opacity", 1)
     d3.select(this)
@@ -60,7 +60,7 @@ function poke_type(type_data,data_pokemon,div_name){
     .style("left", (event.x)/2 + "px")
     .style("top", (event.y)/2 + "px")
     }
-    const mouseleave = function(event,d) {
+    const mouseleave = function(d) {
     tooltip
     .style("opacity", 0)
     d3.select(this)
@@ -72,7 +72,6 @@ function poke_type(type_data,data_pokemon,div_name){
     .style("opacity",1)
     }
 
-  
     // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
     svg
     .selectAll('whatever')
@@ -110,8 +109,6 @@ const svg = d3.select("#"+div_name)
 .append("g")
 .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-//Read the data
-//Read the data
 d3.csv(poke_type_WS).then(function(data) {
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
@@ -162,26 +159,38 @@ const tooltip = d3.select("#"+div_name)
   .style("padding", "5px")
 
 // Three function that change the tooltip when user hover / move / leave a cell
-const mouseover = function(event,d) {
+const mouseover = function(d) {
   tooltip
-    .style("opacity", 1)
+  .style("opacity", 1)
   d3.select(this)
-    .style("stroke", "black")
-    .style("opacity", 1)
-}
+  .style("stroke", "black")
+  .style("opacity", 1)
+  .filter(d=>team_type.includes(d.Attacking))
+  .style("stroke","#9933ff")
+  .style("stroke-width",8)
+  .style("opacity",1)
+  }
 const mousemove = function(event,d) {
   tooltip
     .html(d.Attacking+" VS "+d.Defense +" : "+ d.Value)
     .style("left", (event.x)/2 + "px")
     .style("top", (event.y)/2 + "px")
 }
-const mouseleave = function(event,d) {
+const mouseleave = function(d) {
   tooltip
-    .style("opacity", 0)
+  .style("opacity", 0)
   d3.select(this)
-    .style("stroke", "none")
-    .style("opacity", 0.8)
-}
+  .style("stroke", "none")
+  .style("opacity", 0.8)
+  .filter(d=>team_type.includes(d.Attacking))
+  .style("stroke","#9933ff")
+  .style("stroke-width",4)
+  .style("opacity",1)
+  }
+
+let team_type= [];
+team_type[0] = team[2][0].type[0].charAt(0).toUpperCase() + team[2][0].type[0].slice(1)
+team_type[1] = team[2][0].type[1].charAt(0).toUpperCase() + team[2][0].type[1].slice(1)
 
 // add the squares
 svg.selectAll()
@@ -193,13 +202,16 @@ svg.selectAll()
     .attr("ry", 4)
     .attr("width", x.bandwidth() )
     .attr("height", y.bandwidth() )
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
     .style("fill", function(d) { return myColor(d.Value)} )
-    .style("stroke-width", 4)
-    .style("stroke", "none")
-    .style("opacity", 0.8)
-  .on("mouseover", mouseover)
-  .on("mousemove", mousemove)
-  .on("mouseleave", mouseleave)
+    .style("stroke-width", "none")
+    .style("opacity", 0.7)
+    .filter(d=>team_type.includes(d.Attacking))
+    .attr("stroke","#9933ff")
+    .style("stroke-width",4)
+    .style("opacity",1)
     
 
 // Add title to graph
@@ -317,7 +329,6 @@ function leg_per_region(data_leg_region,region){
         .style("stroke", "black")
         .style("opacity", 1);
       legendary_piechart(d3.select(this).datum().value);
-      console.log(d3.select(this).datum().value);
     }
     // Bars
     svg.selectAll("mybar")

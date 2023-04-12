@@ -3,11 +3,14 @@ body{
     text-align: center;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
-#pokeball{
-    position: fixed;
-    padding:right;
-    top:100px;
+text{
+    font-size: 15px;
+}
+button{
+    margin:center;
+    width: 100px;
+    height: 25px;
+    font-size:15px;
 }
 .dot {
     height: 50px;
@@ -18,30 +21,18 @@ body{
     opacity:0.5;
   }
 .modal {
-    top:110px;
-    right:0;
-    transition-duration: 1s;
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding:left;
     width: 200px; /* Full width */
     height: 300px; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-}
-/* Modal Content */
-.modal-content {
-    float:left;
     background-color: #ffe4c4;
-    transition-duration: 1s;
-    margin: 0px;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 70%;
-    height:80%;
 }
-
-.info_pokemon{
+#team_graph{
+    right:0;
+}
+.show_poke{
     display:flex;
-    padding:right;
+    border: 1px solid red;
 }
 .hidden_text{
     display:none;
@@ -49,3 +40,15 @@ body{
 .story{
     display:none;
 }
+#leg_graph{
+    display:flex;
+}
+#pb_legend{
+    padding:200px 100px 100px 100px;
+}
+.info_pokemon{
+    padding:100px 100px 100px 300px;
+}
+
+
+

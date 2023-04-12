@@ -29,7 +29,7 @@ function teamstat_appear(poke_team,poke_global_data,poke_type_WS,region){
     d3.select("body")
     .select("#team_stat_btn")
     .on("click",function(d){
-        d3.selectAll("#team_stat")
+        d3.selectAll("#team_div")
         .style("display","block");
         })
 
@@ -38,8 +38,6 @@ function teamstat_appear(poke_team,poke_global_data,poke_type_WS,region){
         informations(poke_team,parseInt(selected_pokemon.substr(selected_pokemon.length-1, 1)),"team_info","team_stat");
         plot_type(poke_global_data,poke_team[parseInt(selected_pokemon.substr(selected_pokemon.length-1, 1))][0].type,"team_graph");
     })
-    
-    
     //poke_type_tab(poke_type_WS,poke_team,"team_graph");
     
 }

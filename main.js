@@ -12,8 +12,6 @@ d3.select("#region").on("change", (event, d)=>{
     let selectedOption = d3.select("#region").property("value");
     reset_journey();
 
-   
-
     d3.select("body").select("#intro")
     .data(selectedOption)
     .html("You'll begin your journey in "+ selectedOption)
@@ -120,7 +118,8 @@ d3.select("#region").on("change", (event, d)=>{
         d3.select("body").selectAll("#starter_option")
         .append("img")
         .attr("id","starter_appear")
-        .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png");
+        .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png")
+        .style("display","flex");
         capture_action(poke_team,0,"starter_info","starter");
 
         d3.select("body").selectAll("#beginning")
@@ -132,7 +131,8 @@ d3.select("#region").on("change", (event, d)=>{
             d3.select("body").selectAll("#first_img")
                 .append("img")
                 .attr("id","first_appear")
-                .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png");
+                .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png")
+                .style("display","flex");
             capture_action(poke_team,1,"first_info","first_one")
             d3.select("#type_explainations")
                 .text("YOU DID IT!\n Did you know that each pokemon possessed one or two type.Here are all the proportions of type in all region. You can even see the types of your new pokemon!");     
@@ -147,9 +147,8 @@ d3.select("#region").on("change", (event, d)=>{
                     d3.select("body").selectAll("#second_img")
                     .append("img")
                     .attr("id","second_appear")
-                    .style("float","right")
                     .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
-                    .html(second_poke[0].all_info.name);
+                    .style("display","flex");
                     capture_action(poke_team,2,"second_info","second_one");
                     poke_type_tab(poke_type_WS,poke_team,"poke_WS_tab");//Call function that count type and call piechart
    
@@ -164,13 +163,13 @@ d3.select("#region").on("change", (event, d)=>{
                     .append("img")
                     .attr("id","legend_appear")
                     .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
-                    .html(legend_poke[0].all_info.name);
+                    .style("display","flex");
                     capture_action(poke_team,3,"legend_info","legend_one");
                     legendary_plot(poke_global_data,region);
 
                     d3.select("body").selectAll("#the_end")
                     .transition().duration(10000).style("display","block");
-                    d3.select("body").selectAll("#team_stat").style("display","none");
+                    d3.select("body").selectAll("#team_div").style("display","none");
                     teamstat_appear(poke_team,poke_global_data,poke_type_WS,region); //XXXXXXXXXXXXXXXXX
                 });   
             });
@@ -183,20 +182,3 @@ d3.select("body")
 .select("#reset_btn")
 .on("click",function(d){
     reset_journey();});
-
-
-
-/*
-
-function typeWriter(){
-    //Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_typewriter
-    var i = 0;
-    var txt = 'Lorem ipsum dummy text blabla.';
-    var speed = 50;
-
-    if (i < txt.length) {
-        document.getElementById("text").innerHTML += txt.charAt(i);
-        i++;
-        setTimeout(typeWriter, speed);
-    }
-}*/

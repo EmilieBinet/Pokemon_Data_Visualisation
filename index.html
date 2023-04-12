@@ -7,11 +7,7 @@
 
         <!--Sources-->
         <script src="https://d3js.org/d3.v7.min.js"></script>
-       
-        <!--<script src="https://d3js.org/d3-geo-projection.v3.min.js"></script>
-        <script src="https://d3js.org/topojson.v2.min.js"></script>-->
 
-        
         <!--Style & functions-->
         <link href="index.css" rel="stylesheet" type="text/css">
         <script src="plot.js" defer></script>
@@ -55,11 +51,12 @@
             <br>
             <h2 id="starter_selection">Choose your starter</h2>
             <br>
-            <div class="option" id="starter_option">
+            <div class="show_poke" id="starter_option">
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <div id="img_starter"></div>
+                <div id="starter_info"></div>
 
             </div></div></div>
 
@@ -69,15 +66,15 @@
                 <h3 class="new_pokemon" >New Pokemon Appeared!!</h3>
                 <text>This one seems easy to capture. Try It!</text>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
-                <div id="first_one">
+                <div id="first_one" class="show_poke">
                     <div id="first_img" class="image"></div>
-                <!--<div class="info_pokemon" id="first_info"></div>-->
+                    <div class="info_pokemon" id="first_info"></div>
+                </div>
                 <button class="capture_btn" id="capture_first">Capture it !</button>
                 <br>
             </div>
                 <div id="type_explainations"></div>
                 <div id="poke_type"></div>
-        </div>
 
         
 
@@ -90,15 +87,16 @@
             <text>This one seems more ferocious. You'll need to fight! Choose a pokemon in your team. </text>
             <!--Showing images of a random pokemon from this region except evolution and legendary-->
             
-            <div class="info_pokemon" id="second_info"></div>
-            <!--<div id="fight">
+            <!--<div class="info_pokemon" id="second_info"></div>
+            <div id="fight">
                 <div id="team_fight"></div>
                 
             </div>button class="attack_btn" id="fight_btn">Attack</button>-->
-           <div id="second_one">
-            <div id="second_img" class="image"></div>
-            <button class="capture_btn" id="capture_second">Capture it!</button>
-            <br>
+           <button class="capture_btn" id="capture_second">Capture it!</button>
+            
+           <div id="second_one" class="show_poke">
+                <div id="second_img" class="image"></div>
+                <div class="info_pokemon" id="second_info"></div>
             </div>
             <div id="poke_WS_tab" class="graph"></div>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
@@ -111,19 +109,21 @@
             <br>
             <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
             <!--Showing images of a random pokemon from this region except evolution and legendary-->
-            <div id="legend_one">
-            <div id="legendary_img" class="image"></div>
-            <div class="info_pokemon" id="legend_info"></div>
             <button class="capture_btn" id="capture_legend">Capture it !</button>
-            <br>
+            <div id="legend_one" class="show_poke">
+                <div id="legendary_img" class="image"></div>
+                <div class="info_pokemon" id="legend_info"></div>
             </div>
+            <div id="leg_graph">
             <div id="legendary_region" class="graph"></div>
             <div id="legendary_prop" class="graph"></div>
-        </div>
-                
-        <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
+            <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
             It's making those pokemon less rare each time.
         </div>
+            </div>
+        </div>
+                
+        
 
         <div class="story" id="the_end"> 
             
@@ -132,25 +132,30 @@
             <text>If you're not sure about your team potential. Here's the journey statistics. Feel free to check you pokemon stats!</text>
             <br>
             <button id="team_stat_btn">Team Stats</button>
-            <div id="team_stat">
+            <div id="team_div" >
                 <h3>Click on one of your team Pokemon to see its statistics!</h3>
                 
-                <div id="team" class = "modal">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="poketeam">POKEMON TEAM</h2>
+            <div class="show_poke">
+                <div id="team" class="modal">
+                    <div class="modal-header">
+                        <h2 class="poketeam">POKEMON TEAM</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div id="all_team">
+                            <div id="first_line">
+                                <span class="dot" id="teammate_0" ></span>
+                                <span class="dot" id="teammate_1" ></span>
+                            </div>
+                            <div id="second_line">
+                                <span class="dot" id="teammate_2" ></span>
+                                <span class="dot" id="teammate_3" ></span>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div id="all_team">
-                                <div id="first_line">
-                                    <span class="dot" id="teammate_0" value="0"></span>
-                                    <span class="dot" id="teammate_1" value="1"></span>
-                                </div>
-                                <div id="second_line">
-                                    <span class="dot" id="teammate_2" value="2"></span>
-                                    <span class="dot" id="teammate_3" value="3"></span>
-                </div></div></div></div></div>
+                    </div>
+                </div>
+                <div id="team_stat" class="info_pokemon"></div>
                 <div id="team_graph"></div>
+            </div>
             </div>
             <!--Team popup disapeared and appeared in line in new Popup with all the graph that we show progressivly in the journey (or a part of it)
             By clicking on each pokemon highligh the pokemon link in each stats (type, all statscluster, legendaryornot,...) -->
@@ -158,7 +163,7 @@
             <text>Hope to see you again for a new journey!</text>
             <!--Arrow to go back at the beginning-->
             <br><br><br>
-            <button id="reset_btn">Begin a new Journey</button>
+            <button id="reset_btn">Reset</button>
         </div>
     </body>
 </html>
