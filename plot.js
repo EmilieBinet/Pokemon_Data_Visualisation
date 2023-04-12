@@ -7,16 +7,10 @@ function poke_type(type_data,data_pokemon){
 
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
-
-    d3.select("body")
-    .selectAll("#poke_type")
-    .html("YOU DID IT!"+ "<br><br>" + "Did you know that each pokemon possessed one or two type." );
-
     
     // append the svg object to the div called 'my_dataviz'
     const svg = d3.select("#poke_type")
-    .text("Did you know that :")
-
+    .text("YOU DID IT!\n Did you know that each pokemon possessed one or two type.Here are all the proportions of type in all region. You can even see the types of your new pokemon!")
     .append("svg")
     .attr("id", "piechart_type")
     .attr("width", width)

@@ -139,12 +139,30 @@ d3.select("#region").on("change", (event, d)=>{
             d3.select("body").selectAll("#second_capture")
                 .transition().duration(10000).style("display","block");
 
+            
+            
+            /*d3.select("body").selectAll("#second_img")
+                    .append("img")
+                    .attr("id","second_appear")
+                    .style("float","right")
+                    .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
+                    .html(second_poke[0].all_info.name);
+            let fight_end= await d3.csv(poke_type_WS,function(d){
+                if(d.Attacking == second_poke[0].type[0] && d.Defense == second_poke[0].all_info){
+                    return {all_info : d,type:[d.type1,d.type2]};
+                }
+            })
+            d3.select("body").selectAll("#fight_btn")
+            .on("click",function(d){
+                if()
+            })*/
             d3.select("#capture_second")
                 .on("click",d=>{
                     d3.select("#capture_second").style("display","none");
                     d3.select("body").selectAll("#second_img")
                     .append("img")
                     .attr("id","second_appear")
+                    .style("float","right")
                     .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
                     .html(second_poke[0].all_info.name);
                     capture_action(poke_team,2,"second_info");
@@ -166,8 +184,7 @@ d3.select("#region").on("change", (event, d)=>{
                     legendary_plot(poke_global_data,region);
 
                     d3.select("body").selectAll("#the_end")
-                    .transition().duration(10000)
-                    .style("dipslay","block");
+                    .transition().duration(10000).style("display","block");
                     teamstat_appear(); //XXXXXXXXXXXXXXXXX
                 });   
             });
@@ -220,13 +237,12 @@ function capture_action(poke_team,index,div_name){
         .html(poke_team[index][0].all_info.name +"<br><br>"+poke_team[index][0].all_info.classfication + "<br><br>" +poke_team[index][0].all_info.weight_kg+" kg " + poke_team[index][0].all_info.height_m +" m <br><br>");*/
         
         d3.selectAll("#"+div_name)
-        .data(poke_team[index][0].all_info.classfication)
         .join()
         .append("div")
         .attr("padding","right")
-        .style("width", function(d) { return poke_team[index][0].all_info.hp + "px"; } )
-        .style("background-color","#317b41")
-        .text(poke_team[index][0].all_info.hp + " HP");//afficher barre hp proportionnelle!!!
+        .text(poke_team[index][0].all_info.hp + " HP")
+        .style("width", function(d) { return (poke_team[index][0].all_info.hp*10) + "px"; } )
+        .style("background-color","#317b41");//afficher barre hp proportionnelle!!!
         //Afficher plot avec pourcentage male 
     
 }
