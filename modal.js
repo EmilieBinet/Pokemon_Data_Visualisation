@@ -21,22 +21,25 @@ function popup_appear(){
             modal.style.display = "none";
             d3.select("#team").select(".modal-body").select("#all_team")
             .selectAll("svg").remove();
-    }}
-    
+    }}  
 }
 
-function teamstat_appear(){
+function teamstat_appear(poke_team,poke_global_data,poke_type_WS,region){
     // Get the modal
     d3.select("body")
     .select("#team_stat_btn")
     .on("click",function(d){
-        var modal = document.getElementById("team_stat");
-    d3.select("#team").select(".modal-body").select("#all_team").selectAll("svg").remove();
+        d3.selectAll("#team_stat")
+        .style("display","block");
+        })
 
-    let team = d3.select("#team_stat")
-    .append("svg")
-    .style("padding","left")
+    d3.select("body").selectAll(".dot").on("click",function(){ 
+        let selected_pokemon = this.id;
+        informations(poke_team,parseInt(selected_pokemon.substr(selected_pokemon.length-1, 1)),"team_info","team_stat");
+        plot_type(poke_global_data,poke_team[parseInt(selected_pokemon.substr(selected_pokemon.length-1, 1))][0].type,"team_graph");
+    })
     
-    team.select("#all_team");})
+    
+    //poke_type_tab(poke_type_WS,poke_team,"team_graph");
     
 }

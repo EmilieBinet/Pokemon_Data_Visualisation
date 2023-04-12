@@ -15,8 +15,8 @@
         <!--Style & functions-->
         <link href="index.css" rel="stylesheet" type="text/css">
         <script src="plot.js" defer></script>
-        <script src="region.js" defer></script>
         <script src="modal.js" defer></script>
+        <script src="capture.js" defer></script>
         <script src="view_plot.js" defer></script>
         <script src="main.js" defer></script>
         
@@ -47,24 +47,8 @@
             <br>
         </div>
 
-        <img src="pokeball.png" width=100 height=100 id="pokeball_btn"/>
+        <!--<img src="pokeball.png" width=100 height=100 id="pokeball_btn"/>-->
         
-        <div id="team" class = "modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <h2 class="poketeam">POKEMON TEAM</h2>
-                </div>
-                <div class="modal-body">
-                    <div id="all_team">
-                        <div id="first_line">
-                            <span class="dot" id="first_teammate"></span>
-                            <span class="dot" id="second_teammate"></span>
-                        </div>
-                        <div id="second_line">
-                            <span class="dot" id="third_teammate"></span>
-                            <span class="dot" id="fourth_teammate"></span>
-        </div></div></div></div></div>
 
         <div class="story" id="starter">
             <text class="explainations" id="starter_intro"></text>
@@ -76,9 +60,7 @@
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <div id="img_starter"></div>
-                <div class="info_pokemon" id="starter_info">
-                    <div id="hp_starter" width="0"></div>
-                    <br>
+
             </div></div></div>
 
         <div class="story" id="beginning">
@@ -87,10 +69,13 @@
                 <h3 class="new_pokemon" >New Pokemon Appeared!!</h3>
                 <text>This one seems easy to capture. Try It!</text>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
-                <div id="first_img" class="image"></div>
-                <div class="info_pokemon" id="first_info"></div>
+                <div id="first_one">
+                    <div id="first_img" class="image"></div>
+                <!--<div class="info_pokemon" id="first_info"></div>-->
                 <button class="capture_btn" id="capture_first">Capture it !</button>
                 <br>
+            </div>
+                <div id="type_explainations"></div>
                 <div id="poke_type"></div>
         </div>
 
@@ -110,9 +95,11 @@
                 <div id="team_fight"></div>
                 
             </div>button class="attack_btn" id="fight_btn">Attack</button>-->
+           <div id="second_one">
             <div id="second_img" class="image"></div>
             <button class="capture_btn" id="capture_second">Capture it!</button>
             <br>
+            </div>
             <div id="poke_WS_tab" class="graph"></div>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
@@ -124,10 +111,12 @@
             <br>
             <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
             <!--Showing images of a random pokemon from this region except evolution and legendary-->
+            <div id="legend_one">
             <div id="legendary_img" class="image"></div>
             <div class="info_pokemon" id="legend_info"></div>
             <button class="capture_btn" id="capture_legend">Capture it !</button>
             <br>
+            </div>
             <div id="legendary_region" class="graph"></div>
             <div id="legendary_prop" class="graph"></div>
         </div>
@@ -143,7 +132,26 @@
             <text>If you're not sure about your team potential. Here's the journey statistics. Feel free to check you pokemon stats!</text>
             <br>
             <button id="team_stat_btn">Team Stats</button>
-            <div id="team_stat"></div>
+            <div id="team_stat">
+                <h3>Click on one of your team Pokemon to see its statistics!</h3>
+                
+                <div id="team" class = "modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="poketeam">POKEMON TEAM</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div id="all_team">
+                                <div id="first_line">
+                                    <span class="dot" id="teammate_0" value="0"></span>
+                                    <span class="dot" id="teammate_1" value="1"></span>
+                                </div>
+                                <div id="second_line">
+                                    <span class="dot" id="teammate_2" value="2"></span>
+                                    <span class="dot" id="teammate_3" value="3"></span>
+                </div></div></div></div></div>
+                <div id="team_graph"></div>
+            </div>
             <!--Team popup disapeared and appeared in line in new Popup with all the graph that we show progressivly in the journey (or a part of it)
             By clicking on each pokemon highligh the pokemon link in each stats (type, all statscluster, legendaryornot,...) -->
             <br>

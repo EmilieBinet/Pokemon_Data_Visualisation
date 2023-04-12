@@ -1,4 +1,6 @@
-function poke_type(type_data,data_pokemon){
+function poke_type(type_data,data_pokemon,div_name){
+    d3.select("#piechart"+div_name).remove();
+   
     // set the dimensions and margins of the graph
     const width = 450,
     height = 450,
@@ -8,11 +10,11 @@ function poke_type(type_data,data_pokemon){
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
     
+    console.log(div_name)
     // append the svg object to the div called 'my_dataviz'
-    const svg = d3.select("#poke_type")
-    .text("YOU DID IT!\n Did you know that each pokemon possessed one or two type.Here are all the proportions of type in all region. You can even see the types of your new pokemon!")
+    const svg = d3.select("#"+div_name)
     .append("svg")
-    .attr("id", "piechart_type")
+    .attr("id", "piechart"+div_name)
     .attr("width", width)
     .attr("height", height)
     .append("g")
@@ -30,7 +32,7 @@ function poke_type(type_data,data_pokemon){
     const data_ready = pie(Object.entries(type_data))
 
     // create a tooltip
-    const tooltip = d3.select("#poke_type")
+    const tooltip = d3.select("#"+div_name)
     .append("div")
     .style("opacity", 0)
     .attr("class", "tooltip")
@@ -91,7 +93,8 @@ function poke_type(type_data,data_pokemon){
     .style("opacity",1)
 }
 
-function poke_type_tab(poke_type_WS,team){
+function poke_type_tab(poke_type_WS,team,div_name){
+  d3.select("#tab"+div_name).remove();
   
     // set the dimensions and margins of the graph
 const margin = {top: 150, right: 25, bottom: 30, left: 100},
@@ -99,9 +102,9 @@ width = 1100 - margin.left - margin.right,
 height = 700 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-const svg = d3.select("#poke_WS_tab")
+const svg = d3.select("#"+div_name)
 .append("svg")
-.attr("id","type_tab")
+.attr("id","tab"+div_name)
 .attr("width", width + margin.left + margin.right)
 .attr("height", height + margin.top + margin.bottom)
 .append("g")
@@ -148,7 +151,7 @@ const myColor = d3.scaleLinear()
 .range(["#666666","#cccccc","#dddd00","#ff0000"]);
 
 // create a tooltip
-const tooltip = d3.select("#poke_WS_tab")
+const tooltip = d3.select("#"+div_name)
   .append("div")
   .style("opacity", 0)
   .attr("class", "tooltip")

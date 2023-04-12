@@ -1,4 +1,4 @@
-function plot_type(poke_global_data,data_pokemon){
+function plot_type(poke_global_data,data_pokemon,div_name){
     //FIlter the 
     (async ()=>{
     let type_data = {"grass": 0,"poison":0,"bug":0,"electric":0,"ground":0,"ice":0,"fire":0,"water":0,"normal":0,"flying":0,"ghost": 0,"psychic":0,"dark":0,"fighting":0,"fairy":0,"dragon":0,"rock":0,"steel":0};
@@ -10,7 +10,7 @@ function plot_type(poke_global_data,data_pokemon){
             }}
         return type_data;    
         })
-        poke_type(type_data,data_pokemon);//Call pie chart
+        poke_type(type_data,data_pokemon,div_name);//Call pie chart
     })();
 }
 
@@ -34,12 +34,12 @@ function legendary_plot(poke_global_data,region){
         })();
 }
 function reset_journey(){
+    d3.selectAll(".capture_btn").style("display","block");
     d3.selectAll(".story").style("display","none");
     d3.select("#starter_appear").remove();
     d3.select("#first_appear").remove();
     d3.select("#second_appear").remove();
     d3.select("#legend_appear").remove();
-    d3.select("#piechart_type").remove();
-    d3.select("#type_tab").remove();
     d3.select("#leg_barplot").remove();
+    d3.select(".team_img").remove();
 }

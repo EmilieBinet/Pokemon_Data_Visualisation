@@ -121,7 +121,7 @@ d3.select("#region").on("change", (event, d)=>{
         .append("img")
         .attr("id","starter_appear")
         .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png");
-        capture_action(poke_team,0,"starter_info");
+        capture_action(poke_team,0,"starter_info","starter");
 
         d3.select("body").selectAll("#beginning")
         .transition().duration(10000).style("display","block");
@@ -133,29 +133,14 @@ d3.select("#region").on("change", (event, d)=>{
                 .append("img")
                 .attr("id","first_appear")
                 .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png");
-            capture_action(poke_team,1,"first_info")
-            plot_type(poke_global_data,poke_team[1][0].type);
+            capture_action(poke_team,1,"first_info","first_one")
+            d3.select("#type_explainations")
+                .text("YOU DID IT!\n Did you know that each pokemon possessed one or two type.Here are all the proportions of type in all region. You can even see the types of your new pokemon!");     
+            plot_type(poke_global_data,poke_team[1][0].type,"poke_type");
             
             d3.select("body").selectAll("#second_capture")
                 .transition().duration(10000).style("display","block");
 
-            
-            
-            /*d3.select("body").selectAll("#second_img")
-                    .append("img")
-                    .attr("id","second_appear")
-                    .style("float","right")
-                    .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
-                    .html(second_poke[0].all_info.name);
-            let fight_end= await d3.csv(poke_type_WS,function(d){
-                if(d.Attacking == second_poke[0].type[0] && d.Defense == second_poke[0].all_info){
-                    return {all_info : d,type:[d.type1,d.type2]};
-                }
-            })
-            d3.select("body").selectAll("#fight_btn")
-            .on("click",function(d){
-                if()
-            })*/
             d3.select("#capture_second")
                 .on("click",d=>{
                     d3.select("#capture_second").style("display","none");
@@ -165,8 +150,8 @@ d3.select("#region").on("change", (event, d)=>{
                     .style("float","right")
                     .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
                     .html(second_poke[0].all_info.name);
-                    capture_action(poke_team,2,"second_info");
-                    poke_type_tab(poke_type_WS,poke_team);//Call function that count type and call piechart
+                    capture_action(poke_team,2,"second_info","second_one");
+                    poke_type_tab(poke_type_WS,poke_team,"poke_WS_tab");//Call function that count type and call piechart
    
                     
                 d3.select("body").selectAll("#legend_capture")
@@ -180,12 +165,13 @@ d3.select("#region").on("change", (event, d)=>{
                     .attr("id","legend_appear")
                     .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
                     .html(legend_poke[0].all_info.name);
-                    capture_action(poke_team,2,"legend_info");
+                    capture_action(poke_team,3,"legend_info","legend_one");
                     legendary_plot(poke_global_data,region);
 
                     d3.select("body").selectAll("#the_end")
                     .transition().duration(10000).style("display","block");
-                    teamstat_appear(); //XXXXXXXXXXXXXXXXX
+                    d3.select("body").selectAll("#team_stat").style("display","none");
+                    teamstat_appear(poke_team,poke_global_data,poke_type_WS,region); //XXXXXXXXXXXXXXXXX
                 });   
             });
         });
@@ -193,61 +179,14 @@ d3.select("#region").on("change", (event, d)=>{
 })()
 });
 
-
-d3.select("body")
-    .select("#pokeball_btn")
-    .on("click",function(d){
-        popup_appear();});
-
 d3.select("body")
 .select("#reset_btn")
 .on("click",function(d){
     reset_journey();});
 
-function capture_action(poke_team,index,div_name){
-        d3.selectAll("#"+div_name)
-        .append("text")
-        .attr("x", 0)
-        .attr("y", -100)
-        .attr("text-anchor", "right")
-        .style("font-size", "22px")
-        .text(poke_team[index][0].all_info.name);
-
-        d3.selectAll("#"+div_name).append("text")
-        .attr("text-anchor", "right")
-        .style("font-size", "14px")
-        .style("fill", "red")
-        .style("max-width", 400)
-        .text(poke_team[index][0].all_info.classfication);
-
-        d3.selectAll("#"+div_name).append("text")
-        .attr("text-anchor", "right")
-        .style("font-size", "14px")
-        .style("fill", "red")
-        .style("max-width", 400)
-        .text(poke_team[index][0].all_info.weight_kg+" kg ");
-
-        d3.selectAll("#"+div_name).append("text")
-        .attr("text-anchor", "right")
-        .style("font-size", "14px")
-        .style("fill", "red")
-        .style("max-width", 400)
-        .text(poke_team[index][0].all_info.height_m +" m ");
-        /*.style("display","inline-block")
-        .html(poke_team[index][0].all_info.name +"<br><br>"+poke_team[index][0].all_info.classfication + "<br><br>" +poke_team[index][0].all_info.weight_kg+" kg " + poke_team[index][0].all_info.height_m +" m <br><br>");*/
-        
-        d3.selectAll("#"+div_name)
-        .join()
-        .append("div")
-        .attr("padding","right")
-        .text(poke_team[index][0].all_info.hp + " HP")
-        .style("width", function(d) { return (poke_team[index][0].all_info.hp*10) + "px"; } )
-        .style("background-color","#317b41");//afficher barre hp proportionnelle!!!
-        //Afficher plot avec pourcentage male 
-    
-}
 
 
+/*
 
 function typeWriter(){
     //Source : https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_typewriter
@@ -260,4 +199,4 @@ function typeWriter(){
         i++;
         setTimeout(typeWriter, speed);
     }
-}
+}*/
