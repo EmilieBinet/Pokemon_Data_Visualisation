@@ -8,12 +8,15 @@ function poke_type(type_data,data_pokemon){
     // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
     const radius = Math.min(width, height) / 2 - margin;
 
-    d3.select("#poke_type")
-    .text("YOU DID IT!");
+    d3.select("body")
+    .selectAll("#poke_type")
+    .html("YOU DID IT!"+ "<br><br>" + "Did you know that each pokemon possessed one or two type." );
+
     
     // append the svg object to the div called 'my_dataviz'
     const svg = d3.select("#poke_type")
     .text("Did you know that :")
+
     .append("svg")
     .attr("id", "piechart_type")
     .attr("width", width)
@@ -94,7 +97,7 @@ function poke_type(type_data,data_pokemon){
     .style("opacity",1)
 }
 
-function poke_type_tab(){
+function poke_type_tab(poke_type_WS,team){
   
     // set the dimensions and margins of the graph
 const margin = {top: 150, right: 25, bottom: 30, left: 100},
@@ -112,7 +115,7 @@ const svg = d3.select("#poke_WS_tab")
 
 //Read the data
 //Read the data
-d3.csv("https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_type.csv").then(function(data) {
+d3.csv(poke_type_WS).then(function(data) {
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   const attackType = Array.from(new Set(data.map(d => d.Attacking)))
@@ -206,9 +209,9 @@ svg.selectAll()
 svg.append("text")
       .attr("x", 0)
       .attr("y", -100)
-      .attr("text-anchor", "left")
+      .attr("text-anchor", "center")
       .style("font-size", "22px")
-      .text("A d3.js heatmap");
+      .text("Weakness and Strenght Against Each Type");
 
 // Add subtitle to graph
 svg.append("text")
@@ -251,7 +254,7 @@ svg.append("text")
 }
 
 
-function leg_per_region(data_leg_region){
+function leg_per_region(data_leg_region,region){
 
     // set the dimensions and margins of the graph
     const margin = {top: 10, right: 30, bottom: 90, left: 40},
@@ -293,6 +296,11 @@ function leg_per_region(data_leg_region){
     svg.append("g")
     .call(d3.axisLeft(y));
     
+    console.log(region)
+    const color = d3.scaleOrdinal()
+    .domain(region)
+    .range(d3.schemePaired );
+
     // Three function that change the tooltip when user hover / move / leave a cell
     const mouseover = function(d) {
 
@@ -320,7 +328,7 @@ function leg_per_region(data_leg_region){
     .join("rect")
     .attr("x", d => x(d.region))
     .attr("width", x.bandwidth())
-    .attr("fill", "#69b3a2")
+    .attr("fill", d=> color(d.region))
     // no bar at the beginning thus:
     .attr("height", d => height - y(0)) // always equal to 0
     .attr("y", d => y(0))

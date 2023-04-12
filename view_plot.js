@@ -29,7 +29,7 @@ function legendary_plot(poke_global_data,region){
                 return data_leg[1]=data_leg[1]+1;
             }
             })
-            leg_per_region(data_leg_region);
+            leg_per_region(data_leg_region,region);
             //legendary_piechart(data_leg);
         })();
 }

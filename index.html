@@ -85,15 +85,13 @@
                 <text class="explainations" id="intro"></text>
                 <br>
                 <h3 class="new_pokemon" >New Pokemon Appeared!!</h3>
+                <text>This one seems easy to capture. Try It!</text>
                 <!--Showing images of a random pokemon from this region except evolution and legendary-->
                 <div id="first_img" class="image"></div>
-                <div class="info_pokemon" id="starter_info"></div>
+                <div class="info_pokemon" id="first_info"></div>
                 <button class="capture_btn" id="capture_first">Capture it !</button>
                 <br>
                 <div id="poke_type"></div>
-                <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
-                    Pie chart about pokemon ype proportion
-                -->
         </div>
 
         
@@ -104,56 +102,54 @@
             <br>
                 
             <h3 class="new_pokemon">New Pokemon Appeared!!</h3>
+            <text>This one seems more ferocious. You'll need to fight! Choose a pokemon in your team. </text>
             <!--Showing images of a random pokemon from this region except evolution and legendary-->
-            <div id="second_img" class="image"></div>
-            <div class="info_pokemon" id="starter_info"></div>
-            <button class="capture_btn" id="second_capture">Capture it !</button>
-            <br>
+            <div id="fight">
+                <div id="team_fight"></div>
+                <div id="second_img" class="image"></div>
+            </div>
+            <div class="info_pokemon" id="second_info"></div>
+            <button class="attack_btn" id="fight_btn">Attack</button>
         </div>
-
-        <div class="story" id="after_second_capture">
-                <text>You did it!</text>
-                <br>
-                <text> Did you know that : </text>
-                <div id="poke_WS_tab" class="graph"></div>
+        <div class="story" id="fight_success">
+            <button class="capture_btn" id="capture_second"></button>
+            <br>
+            <div id="poke_WS_tab" class="graph"></div>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
                 --> 
-                <br>
         </div>
+
+        
+
 
         <div class="story" id="legend_capture">
             <text class="explainations" id="intro"></text>
             <br>
-                <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
-                <!--Showing images of a random pokemon from this region except evolution and legendary-->
-                <div id="legendary_img" class="image"></div>
-                <div class="info_pokemon" id="starter_info"></div>
-                <button class="capture_btn" id="legend_capture">Capture it !</button>
-                <br>
+            <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
+            <!--Showing images of a random pokemon from this region except evolution and legendary-->
+            <div id="legendary_img" class="image"></div>
+            <div class="info_pokemon" id="legend_info"></div>
+            <button class="capture_btn" id="capture_legend">Capture it !</button>
+            <br>
+            <div id="legendary_region" class="graph"></div>
+            <div id="legendary_prop" class="graph"></div>
         </div>
-        <div class="story" id="after_legend_capture">
-                <text>You did it!</text>
-                <br>
-                <text> Did you know that : </text>
-                <div id="legendary_region" class="graph"></div>
-                <div id="legendary_prop" class="graph"></div>
-                <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
-                    It's making those pokemon less rare each time.
-                </div>
-                <br>
+                
+        <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
+            It's making those pokemon less rare each time.
+        </div>
+        <br>
                 <!--Showing stat about other pokemon hilighting the one we captured (cluster of pokemon by attck/def , spe att/spe_def,...)
                     Pie chart about pokemon ype proportion
                 -->
-        </div>
-        </div>
 
             <!--Doing it 3 more time (or an egg)-->
             <!--Fight a enemy team of the region-->
             <!--Doing it for a legendary + bar plot about number of legendary per region-->
         
-        <div class="story" id="end">
-            <text>You're now ready to fight the Champion's Ligue of ...</text>
+        <div class="story" id="the_end">
+            <text>You're now ready to fight the Champion's League.</text>
             <br>
             <text>If you're not sure about your team potential. Here's the journey statistics. Feel free to check you pokemon stats!</text>
             <br>

@@ -3,7 +3,7 @@
 
 let poke_image_src = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon/";
 let poke_global_data = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_global.csv";
-let poke_type_WS = "https://raw.githubusercontent.com/zonination/pokemon-chart/master/chart.csv";
+let poke_type_WS = "https://raw.githubusercontent.com/EmilieBinet/Pokemon_Data_Visualisation/main/pokemon_type.csv";
 
 let region = ["Kanto","Johto","Hoenn","Sinnoh","Unova","Kalos","Alola"]
 
@@ -122,47 +122,57 @@ d3.select("#region").on("change", (event, d)=>{
         .attr("id","starter_appear")
         .attr("src",poke_image_src + starter_poke[0].all_info.pokedex_number + ".png");
         capture_action(poke_team,0,"starter_info");
-        console.log("hello")
 
         d3.select("body").selectAll("#beginning")
         .transition().duration(10000).style("display","block");
 
        d3.select("#capture_first")
        .on("click",d=>{
-        d3.select("#capture_first").style("display","none");
-        d3.select("body").selectAll("#first_img")
-            .append("img")
-            .attr("id","first_appear")
-            .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png")
-            .html(first_poke[0].all_info.name);})
+            d3.select("#capture_first").style("display","none");
+            d3.select("body").selectAll("#first_img")
+                .append("img")
+                .attr("id","first_appear")
+                .attr("src",poke_image_src + first_poke[0].all_info.pokedex_number + ".png");
+            capture_action(poke_team,1,"first_info")
+            plot_type(poke_global_data,poke_team[1][0].type);
+            
+            d3.select("body").selectAll("#second_capture")
+                .transition().duration(10000).style("display","block");
 
-        plot_type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
-        
-
-
-    });
-/*
-    d3.select("body").selectAll("#second_img")
-    .append("img")
-    .attr("id","second_appear")
-    .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
-    .html(second_poke[0].all_info.name);
-
-    d3.select("body").selectAll("#legendary_img")
-    .append("img")
-    .attr("id","legend_appear")
-    .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
-    .html(legend_poke[0].all_info.name);
+            d3.select("#capture_second")
+                .on("click",d=>{
+                    d3.select("#capture_second").style("display","none");
+                    d3.select("body").selectAll("#second_img")
+                    .append("img")
+                    .attr("id","second_appear")
+                    .attr("src",poke_image_src + second_poke[0].all_info.pokedex_number + ".png")
+                    .html(second_poke[0].all_info.name);
+                    capture_action(poke_team,2,"second_info");
+                    poke_type_tab(poke_type_WS,poke_team);//Call function that count type and call piechart
    
-    console.log(poke_team[1][0].type);
-    plot_type(poke_global_data,poke_team[1][0].type);//Call function that count type and call piechart
-    poke_type_tab();
-    legendary_plot(poke_global_data,region);
+                    
+                d3.select("body").selectAll("#legend_capture")
+                .transition().duration(10000).style("display","block");
 
-    teamstat_appear()
-    */
+                d3.select("#capture_legend")
+                .on("click",d=>{
+                    d3.select("#capture_legend").style("display","none");
+                    d3.select("body").selectAll("#legendary_img")
+                    .append("img")
+                    .attr("id","legend_appear")
+                    .attr("src",poke_image_src + legend_poke[0].all_info.pokedex_number + ".png")
+                    .html(legend_poke[0].all_info.name);
+                    capture_action(poke_team,2,"legend_info");
+                    legendary_plot(poke_global_data,region);
 
-    
+                    d3.select("body").selectAll("#the_end")
+                    .transition().duration(10000)
+                    .style("dipslay","block");
+                    teamstat_appear(); //XXXXXXXXXXXXXXXXX
+                });   
+            });
+        });
+    });
 })()
 });
 
@@ -179,14 +189,44 @@ d3.select("body")
 
 function capture_action(poke_team,index,div_name){
         d3.selectAll("#"+div_name)
-        .style("display","inline-block")
-        .html(poke_team[index][0].all_info.name +"<br><br>"+poke_team[index][0].all_info.classfication + "<br><br>" +poke_team[index][0].all_info.weight_kg+" kg " + poke_team[index][0].all_info.height_m +" m <br><br>");
-        d3.selectAll("#starter_info")
+        .append("text")
+        .attr("x", 0)
+        .attr("y", -100)
+        .attr("text-anchor", "right")
+        .style("font-size", "22px")
+        .text(poke_team[index][0].all_info.name);
+
+        d3.selectAll("#"+div_name).append("text")
+        .attr("text-anchor", "right")
+        .style("font-size", "14px")
+        .style("fill", "red")
+        .style("max-width", 400)
+        .text(poke_team[index][0].all_info.classfication);
+
+        d3.selectAll("#"+div_name).append("text")
+        .attr("text-anchor", "right")
+        .style("font-size", "14px")
+        .style("fill", "red")
+        .style("max-width", 400)
+        .text(poke_team[index][0].all_info.weight_kg+" kg ");
+
+        d3.selectAll("#"+div_name).append("text")
+        .attr("text-anchor", "right")
+        .style("font-size", "14px")
+        .style("fill", "red")
+        .style("max-width", 400)
+        .text(poke_team[index][0].all_info.height_m +" m ");
+        /*.style("display","inline-block")
+        .html(poke_team[index][0].all_info.name +"<br><br>"+poke_team[index][0].all_info.classfication + "<br><br>" +poke_team[index][0].all_info.weight_kg+" kg " + poke_team[index][0].all_info.height_m +" m <br><br>");*/
+        
+        d3.selectAll("#"+div_name)
         .data(poke_team[index][0].all_info.classfication)
         .join()
         .append("div")
+        .attr("padding","right")
         .style("width", function(d) { return poke_team[index][0].all_info.hp + "px"; } )
-        .style("background-color","#317b41");//afficher barre hp proportionnelle!!!
+        .style("background-color","#317b41")
+        .text(poke_team[index][0].all_info.hp + " HP");//afficher barre hp proportionnelle!!!
         //Afficher plot avec pourcentage male 
     
 }

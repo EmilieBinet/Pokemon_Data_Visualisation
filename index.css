@@ -53,10 +53,10 @@ body{
     text-decoration: none;
     cursor: pointer;
     }
-/*FAIRE Modal TEAM use https://www.w3schools.com/Css/css_positioning.asp */
 
 .info_pokemon{
-    display:none;
+    display:flex;
+    padding:right;
 }
 .hidden_text{
     display:none;
