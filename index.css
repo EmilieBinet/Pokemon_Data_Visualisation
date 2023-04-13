@@ -2,6 +2,11 @@ body{
     background-color: #d5d5ff;
     text-align: center;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size:100%;
+}
+h1{
+    font-family:'Impact', 'fantasy';
+    font-size:200%;
 }
 text{
     font-size: 15px;
@@ -32,7 +37,6 @@ button{
 }
 .show_poke{
     display:flex;
-    border: 1px solid red;
 }
 .hidden_text{
     display:none;
@@ -47,7 +51,8 @@ button{
     padding:200px 100px 100px 100px;
 }
 .info_pokemon{
-    padding:100px 100px 100px 300px;
+    padding-top:50px;
+    padding-left:100px;
 }
 
 
