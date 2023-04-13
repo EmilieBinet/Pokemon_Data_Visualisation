@@ -18,28 +18,26 @@ function plot_type(poke_global_data,data_pokemon,div_name){
 function legendary_plot(poke_global_data,region){
     (async ()=>{
         let data_leg_region ={"Kanto":0,"Johto":0,"Hoenn":0,"Sinnoh":0,"Unova":0,"Kalos":0,"Alola":0};
-        let data_leg={"Legendary":0,"Non-Legendary":0};
 
         await d3.csv(poke_global_data,function(d){
             if(d.is_legendary == 1){
                 var reg = region[d.generation-1];
-                return ((data_leg_region[reg] = data_leg_region[reg] + 1),(data_leg[0]=data_leg[0]+1));
+                return data_leg_region[reg] = data_leg_region[reg] + 1;
                 } 
-            else{
-                return data_leg[1]=data_leg[1]+1;
-            }
+            
             })
             leg_per_region(data_leg_region,region);
-            //legendary_piechart(data_leg);
+
         })();
 }
 function reset_journey(){
     d3.selectAll(".capture_btn").style("display","block");
-    d3.selectAll(".story").style("display","none");
     d3.select("#starter_appear").remove();
     d3.select("#first_appear").remove();
     d3.select("#second_appear").remove();
     d3.select("#legend_appear").remove();
     d3.select("#leg_barplot").remove();
     d3.select(".team_img").remove();
+    d3.selectAll(".story").style("display","none");
+    
 }

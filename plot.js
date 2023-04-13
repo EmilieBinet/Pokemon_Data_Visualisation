@@ -257,7 +257,7 @@ svg.append("text")
 })
 }
 
-function show_tem_WS(poke_type_WS,pokemon,div_name,subdiv_name){
+function show_team_WS(poke_type_WS,pokemon,div_name,subdiv_name){
   (async ()=>{
 
     let team_type= [];

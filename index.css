@@ -18,18 +18,23 @@ button{
     font-size:15px;
 }
 .dot {
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     opacity:0.5;
   }
+.dot:hover{
+    height: 125px;
+    width: 125px;
+    cursor: pointer;
+  }
 .modal {
     z-index: 1; /* Sit on top */
     padding:left;
-    width: 200px; /* Full width */
-    height: 300px; /* Full height */
+    width: 300px; /* Full width */
+    height: 400px; /* Full height */
     background-color: #ffe4c4;
 }
 #team_graph{
@@ -37,6 +42,7 @@ button{
 }
 .show_poke{
     display:flex;
+    border: 1px solid red;
 }
 .hidden_text{
     display:none;
@@ -47,12 +53,29 @@ button{
 #leg_graph{
     display:flex;
 }
+#legend_intro{
+    padding-top: 200px;
+}
 #pb_legend{
     padding:200px 100px 100px 100px;
 }
 .info_pokemon{
     padding-top:50px;
     padding-left:100px;
+}
+.capture_btn{
+    text-align: center;
+    border: 1px solid red;
+}
+.starter_btn{
+    border: 1px solid red;
+}
+.starter_btn:hover{
+    
+    text-align: center;
+    width: 10%;
+    height: 10%;;
+    cursor: pointer;
 }
 
 

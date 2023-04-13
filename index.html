@@ -26,7 +26,7 @@
 
         <div  id="introduction">
             <!--Region selection-->
-            <text>Hello! On this website you will be able to try a quick Pokemon Trainer Journey and you will get some useful and interesting information!</text>
+            <text>Hello! Pokemon games are well known all around the world but that doesn't mean that everyone know everything of this. On this website you will be able to try a quick Pokemon Trainer Journey and you will get some useful and interesting information!</text>
             <br><br>
             <text>First choose where you will go on a adventure!</text>
             <br><br>
@@ -44,21 +44,17 @@
             <br>
         </div>
 
-        <!--<img src="pokeball.png" width=100 height=100 id="pokeball_btn"/>-->
-        
-
         <div class="story" id="starter">
             <text class="explainations" id="starter_intro"></text>
             <br>
             <h2 id="starter_selection">Choose your starter</h2>
             <br>
+            <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
+            <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
+            <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
             <div class="show_poke" id="starter_option">
-                <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
-                <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
-                <img src="pokeball_starter.png" width=100 height=100 class="starter_btn"/>
                 <div id="img_starter"></div>
                 <div id="starter_info"></div>
-
             </div></div></div>
 
         <div class="story" id="beginning">
@@ -71,7 +67,8 @@
                     <div id="first_img" class="image"></div>
                     <div class="info_pokemon" id="first_info"></div>
                 </div>
-                <button class="capture_btn" id="capture_first">Capture it !</button>
+                <br>
+               <button class="capture_btn" id="capture_first">Capture it !</button> 
                 <br>
             </div>
                 <div id="type_explainations"></div>
@@ -104,17 +101,20 @@
             <br>
             <h3 class="new_pokemon">New Pokemon Appeared!! It's a legendary!!</h3>
             <!--Showing images of a random pokemon from this region except evolution and legendary-->
-            <button class="capture_btn" id="capture_legend">Capture it !</button>
+            <button class="capture_btn" id="capture_legend">Capture it!</button>
             <div id="legend_one" class="show_poke">
                 <div id="legendary_img" class="image"></div>
                 <div class="info_pokemon" id="legend_info"></div>
             </div>
+            
             <div id="leg_graph">
-            <div id="legendary_region" class="graph"></div>
-            <div id="legendary_prop" class="graph"></div>
-            <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
-            It's making those pokemon less rare each time.
-        </div>
+                <div id="legend_intro" >There are different Legendary Pokemon in each region that add something on the Pokemon world mythology.
+                </div>
+                <div id="legendary_region" class="graph"></div>
+                <div id="legendary_prop" class="graph"></div>
+                <div id="pb_legend" class="hidden_text">You can see that the number of Legendary pokemon per region is increasing.
+                It's making those pokemon less rare each time.
+                </div>
             </div>
         </div>
                 
